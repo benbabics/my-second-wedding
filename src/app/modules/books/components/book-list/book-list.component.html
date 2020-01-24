@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body pb-0">
+        <h5 class="card-title">Books</h5>
+
+        <form (submit)="bookCreate()">
+          <input [(ngModel)]="bookName" name="bookName" type="text" class="form-control"  placeholder="Create book">
+        </form>
+      </div>
+
+      <div class="card-body pb-0">
+        <ul class="list-group list-group-flush">
+          <li *ngFor="let book of books" class="list-group-item d-flex align-items-center pl-3 pr-1">
+            <a routerLink="./{{ book.id }}">{{ book.title }}</a>
+            <button type="button" class="close ml-auto" (click)="bookDestroy(book)">
+              <small>&times;</small>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body pb-0">
+        <h5 class="card-title">Characters</h5>
+
+        <form (submit)="characterCreate()">
+          <input [(ngModel)]="characterName" name="characterName" type="text" class="form-control"  placeholder="Create character">
+        </form>
+      </div>
+
+      <div class="card-body pb-0">
+        <ul class="list-group list-group-flush">
+          <li *ngFor="let character of characters" class="list-group-item d-flex align-items-center pl-3 pr-1">
+            {{ character.name }}
+            <button type="button" class="close ml-auto" (click)="characterDestroy(character)">
+              <small>&times;</small>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <router-outlet></router-outlet>
+  </div>
+</div>

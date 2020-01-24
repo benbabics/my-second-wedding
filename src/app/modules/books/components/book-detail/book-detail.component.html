@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-body">
+
+    <p *ngIf="!listableCharacters.length">There aren&#39;t any characters.</p>
+
+    <ul *ngIf="listableCharacters.length" class="list-group list-group-flush mb-3">
+      <li *ngFor="let character of listableCharacters" class="pl-3 list-group-item d-flex align-items-center">
+        {{ character.name }}
+        <button type="button" class="close ml-auto" (click)="characterRemove(character.id)">
+          <small>&times;</small>
+        </button>
+      </li>
+    </ul>
+
+    <div class="bg-light">
+      <button *ngIf="!showCharacterSelection" class="btn btn-link btn-block text-left" (click)="showCharacterSelection = true">Add Characters</button>
+
+      <div *ngIf="showCharacterSelection">
+        <div *ngFor="let character of selectableCharacters" class="list-group">
+          <button class="btn btn-link text-left" (click)="characterAdd(character.id)">{{ character.name }}</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
