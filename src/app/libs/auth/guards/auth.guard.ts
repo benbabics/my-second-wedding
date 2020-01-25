@@ -1,22 +1,39 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Router, UrlTree } from '@angular/router';
+import { CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { SessionService } from '../services/session.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanActivateChild {
 
   constructor(
     private router: Router,
     private session: SessionService,
   ) { }
 
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.session.isSignedIn) {
-      return true;
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
+    console.log('* canActivate', state.url);
+
+    if (!this.session.isSignedIn) {
+      switch(state.url) {
+        case "/":
+          return this.router.createUrlTree(['/welcome']);
+      }
     }
     
-    this.router.navigateByUrl('');
-    return false;
+    return true;
+  }
+
+  canActivateChild(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
+    console.log('* canActivateChild', state.url);
+
+    if (!this.session.isSignedIn) {
+      switch(state.url) {
+        default:
+          return this.router.createUrlTree(['/signin']);
+      }
+    }
+    
+    return true;
   }
 }
