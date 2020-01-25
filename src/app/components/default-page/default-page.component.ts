@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SessionService } from '../../libs/auth/services/session.service';
 
 @Component({
   selector: 'app-default-page',
@@ -8,11 +9,18 @@ import { Router } from '@angular/router';
 })
 export class DefaultPageComponent implements OnInit {
 
+  get isSignedIn(): boolean {
+    return this.session.isSignedIn;
+  }
+
   constructor(
     protected router: Router,
+    private session: SessionService,
   ) { }
 
   ngOnInit() {
-    console.log('** DefaultPage shown');
+    if (this.isSignedIn) {
+      this.router.navigate(['/dashboard']);
+    }
   }
 }

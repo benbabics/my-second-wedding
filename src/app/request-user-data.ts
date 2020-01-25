@@ -13,7 +13,7 @@ export class RequestUserData {
     (window as any).db = db; // temp
   }
 
-  protected loadData() {
+  protected requestUserData() {
     if (this.session.isSignedIn) {
       this.initUserData();
     }

@@ -27,7 +27,6 @@ import { AuthenticationService } from './libs/auth/services/authentication.servi
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { HeaderComponent } from './components/header/header.component';
-import { ProtectedPageComponent } from './components/protected-page/protected-page.component';
 import { DefaultPageComponent } from './components/default-page/default-page.component';
 
 const FIREBASE_CONFIG = {
@@ -69,7 +68,6 @@ const FIREBASE_CONFIG = {
     AppComponent,
     WelcomeComponent,
     HeaderComponent,
-    ProtectedPageComponent,
     DefaultPageComponent,
   ],
   bootstrap: [

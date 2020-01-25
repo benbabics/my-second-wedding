@@ -12,8 +12,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   ) { }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
-    console.log('* canActivate', state.url);
-
     if (!this.session.isSignedIn) {
       switch(state.url) {
         case "/":
@@ -25,8 +23,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   }
 
   canActivateChild(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
-    console.log('* canActivateChild', state.url);
-
     if (!this.session.isSignedIn) {
       switch(state.url) {
         default:
